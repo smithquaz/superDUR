@@ -3,7 +3,7 @@
 
 int main(){
 
-    // int height;
+    int height;
 
     // recursively get the height to ensure that height is between 1 and 8 inclusive
     // get user-input on the height of the pyramid
