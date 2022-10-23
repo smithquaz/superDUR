@@ -48,6 +48,6 @@ IEEE SSCI Hackathon 2022 Champions
 2. If any contradiction is found, output false
 3. If all managed to pass succesfully, output true
 
-### Phase 4: Output Display (undecided)
+### Phase 4: Output Display (if time)
 1. Output the result
 2. Design the page
