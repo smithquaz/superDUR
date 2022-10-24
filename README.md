@@ -41,7 +41,7 @@ IEEE SSCI Hackathon 2022 Champions
     * Break when list finished traversing or all KB item is found
     * O(m) * O(p + m) - note: python 3.10 only
 2. Remove all DDIs with 0 matches (not relevant)
-3. Sort the DDIs in terms of number of matches (use Merge Sort) 
+3. Sort the DDIs in terms of number of matches (use Merge Sort, O(n * logn))
 
 ### Phase 3b: AI Resolution (inference engine)
 1. Repeat for all DDIs, pass them one by one into the inference engine
