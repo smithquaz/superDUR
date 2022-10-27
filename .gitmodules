@@ -1,0 +1,3 @@
+[submodule "packages/build/cogutil"]
+	path = packages/build/cogutil
+	url = https://github.com/opencog/cogutil.git
