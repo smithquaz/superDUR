@@ -54,10 +54,6 @@ if __name__ == '__main__':
         for i in range(100):
             array2.append(random.randint(0, 2000))
         
-        # print initial array
-        # print("Given array1 is", end="\n")
-        # print_list(array1)
-        
         from timeit import default_timer as timer
 
         start = timer()
@@ -65,10 +61,6 @@ if __name__ == '__main__':
         # calls merge sort
         merge_sort(array1)
         merge_sort(array2)
-
-        # print sorted array
-        # print("Sorted array1 is: ", end="\n")
-        # print_list(array1)
 
         end = timer()
 
