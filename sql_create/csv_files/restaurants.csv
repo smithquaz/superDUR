@@ -1,0 +1,12 @@
+id,name,location,location_description,postal_code,area,cuisine,description,price_lower,price_upper,vegetarian,overall_rating,website,phone,email,google_maps_name,last_updated
+1,Hamburg Steak Keisuke,"72 Peck Seah St, Singapore",1 min walk from Tanjong Pagar MRT,079329,Lakeside,Western,Best Hamburg Steak,15,25,0,3.9,https://www.keisuke.sg/hamburg-steak-keisuke,62252235,keisukesingapore@keisuke.com.sg,Hamburg+Steak+Keisuke,
+2,Tsukada Nojo,Thompson Plaza / Plaza Singapura,1 min walk from Tanjong Pagar MRT,079329,Jurong East,Japanese,zz,15,25,1,4.1,https://www.keisuke.sg/hamburg-steak-keisuke,62252235,keisukesingapore@keisuke.com.sg,Tsukada+Nojo,
+3,Chang Korean Charcoal BBQ Restaurant,Dempsey Hill,1 min walk from Tanjong Pagar MRT,079329,Lakeside,Korean,zz,15,25,0,4.3,https://www.keisuke.sg/hamburg-steak-keisuke,62252235,keisukesingapore@keisuke.com.sg,Chang+Korean+Charcoal+BBQ+Restaurant,
+4,Candlenut,"Block 17A Dempsey Road, Singapore",,249676,Gulin,Peranakan,zz,15,25,1,4.4,https://www.keisuke.sg/hamburg-steak-keisuke,62252235,keisukesingapore@keisuke.com.sg,Candlenut,
+5,Morgenfield's,"1 Vista Exchange Green, #02-23",1 min walk from Tanjong Pagar MRT,138617,Buona Vista,Western,zz,15,25,1,2.2,https://www.keisuke.sg/hamburg-steak-keisuke,62252235,keisukesingapore@keisuke.com.sg,Morgenfield's,
+6,Morgenfield's,"3 Temasek Blvd, #01 - 645 / 646",1 min walk from Tanjong Pagar MRT,038983,Chinatown,Western,zz,15,25,1,2.2,https://www.keisuke.sg/hamburg-steak-keisuke,62252235,keisukesingapore@keisuke.com.sg,Morgenfield's,
+7,Morgenfield's,"1 HarbourFront Walk, #01-51A VivoCity",1 min walk from Tanjong Pagar MRT,098585,Habourfront,Western,zz,15,25,1,2.2,https://www.keisuke.sg/hamburg-steak-keisuke,62252235,keisukesingapore@keisuke.com.sg,Morgenfield's,
+6,Song Fa Bak Kut Teh,"50 Jurong Gateway Rd, #B1-09",Inside Jem,608549,Jurong East,Chinese,zz,15,25,0,3.4,https://songfa.com.sg/,62624818,keisukesingapore@keisuke.com.sg,Song+Fa+Bak+Kut+Teh,
+7,Song Fa Bak Kut Teh,"11 New Bridge Rd, #01-01",Inside Jem,059383,Chinatown,Chinese,zz,15,25,0,3.4,https://songfa.com.sg/,62624818,keisukesingapore@keisuke.com.sg,Song+Fa+Bak+Kut+Teh,
+8,Song Fa Bak Kut Teh,"133 New Bridge Rd, #01-04",Inside Jem,059413,Chinatown,Chinese,zz,15,25,0,3.4,https://songfa.com.sg/,62624818,keisukesingapore@keisuke.com.sg,Song+Fa+Bak+Kut+Teh,
+9,Song Fa Bak Kut Teh,"1 Maritime Square, #02-74/75",Inside Jem,099253,Habourfront,Chinese,zz,15,25,0,3.4,https://songfa.com.sg/,62624818,keisukesingapore@keisuke.com.sg,Song+Fa+Bak+Kut+Teh,
