@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+<title>superDUR</title>
+{% endblock %}
+
+{% block body %} 
+<div class="content">
+    <h1 style="text-align:center">Enter Medication Name</h1>
+
+    <table>
+        <tr>
+            <th>NRIC</th>
+            <th>Medication to Check</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.content }}</td>
+                <td>
+                    <a href="/delete/{{task.id}}">Delete</a>
+                    <br>
+                    <a href="/update/{{task.id}}">Update</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <form action="/" method="POST">
+        <input type="text" name="content" id="nric_content">
+        <input type="submit" value="Enter NRIC">
+    </form> 
+    <form action="/" method="POST">
+        <input type="text" name="content" id="newmed_content">
+        <input type="submit" value="Add Medication">
+    </form> 
+    <form action="/" method="POST">
+        <input type="text" name="content" id="get_status">
+        <input type="submit" value="Get DDI result">
+    </form> 
+</div>
+{% endblock %}
