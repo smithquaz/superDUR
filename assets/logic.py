@@ -132,6 +132,10 @@ class And(Sentence):
         Sentence.validate(conjunct)
         self.conjuncts.append(conjunct)
 
+    def remove(self, conjunct):
+        Sentence.validate(conjunct)
+        self.conjuncts.remove(conjunct)
+
     def evaluate(self, model):
         return all(conjunct.evaluate(model) for conjunct in self.conjuncts)
 
