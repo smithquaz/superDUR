@@ -2,18 +2,20 @@
 
 from assets.logic import *
 
-def populate_kb(current_drugs, new_drugs, ddis, medical_conditons, biconditionals):
+def populate_kb(current_drugs, new_drugs, not_included, ddis, medical_conditons, biconditionals):
     
     # create empty kb
     kb = And()
 
-    for drugs in current_drugs:
+    yes = [current_drugs, new_drugs]
+    for categories in yes:
+        for drugs in categories:
 
-        # create object then add into kb
-        kb.add(Symbol(drugs))
+            # create object then add into kb
+            kb.add(Symbol(drugs))
 
     # populate kb with all the DDIs, Medical Conditions and new drugs (prove by contradiction)
-    nots = [new_drugs, ddis, medical_conditons]
+    nots = [not_included, ddis, medical_conditons]
     for categories in nots:
         for drugs in categories:
             
@@ -274,10 +276,10 @@ def contradiction(kb):
     return False
 
 # give a few parameters, determine if the doctor can safely prescribe the drug
-def is_safe(current_drugs, new_drugs, ddis, medical_conditons, biconditionals):
+def is_safe(current_drugs, new_drugs, not_included, ddis, medical_conditons, biconditionals):
     
     # populate a knowledge base using all the parameters
-    kb = populate_kb(current_drugs, new_drugs, ddis, medical_conditons, biconditionals)
+    kb = populate_kb(current_drugs, new_drugs, not_included, ddis, medical_conditons, biconditionals)
     print(f'    original kb: {kb.formula()}')
 
     # convert the kb to conjunctive normal form
@@ -301,33 +303,55 @@ def main():
         Medical Condition: None
         Biconditionals: None
     '''
-    current_drugs = {'A', 'B', 'D'}
+    current_drugs = {'A', 'B'}
     new_drugs = {'C'}
-    ddi = {'A'}
+    not_included = {'D'}
+    ddi = {'A', 'D'}
     medical_condition = {}
     biconditionals = {}
 
-    if is_safe(current_drugs, new_drugs, ddi, medical_condition, biconditionals):
+    if is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals):
         print('Test 1 Failed')
     else:
         print('Test 1 Passed')
 
+    # scenario 1b: Conflict between DDI and Current Drugs
+    '''
+        Current Drugs: A, B
+        New Drug: C
+        Relevant DDI: D
+        Medical Condition: None
+        Biconditionals: None
+    '''
+    current_drugs = {'A', 'B'}
+    new_drugs = {'C'}
+    not_included = {'D'}
+    ddi = {'D'}
+    medical_condition = {}
+    biconditionals = {}
+
+    if is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals):
+        print('Test 1b Passed')
+    else:
+        print('Test 1b Failed')
+
 
     # scenario 2: Doctor forgot to prescribe certain drugs together (biconditional)
     '''
-        Current Drugs: A
+        Current Drugs: A, B
         New Drug: C
         Relevant DDI: None
-        Medical Condition: None
-        Biconditionals: C <=> E
+        Medical Condition: E
+        Biconditionals: A <=> E
     '''
     current_drugs = {'A'}
-    new_drugs = {'C'}
-    ddi = {'E'}
+    new_drugs = {'B'}
+    not_included = {'C'}
+    ddi = {}
     medical_condition = {}
-    biconditionals = {frozenset(['A', 'E'])}
+    biconditionals = {frozenset(['B', 'C'])}
 
-    if is_safe(current_drugs, new_drugs, ddi, medical_condition, biconditionals):
+    if is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals):
         print('Test 2 Failed')
     else:
         print('Test 2 Passed')
@@ -342,11 +366,12 @@ def main():
     '''
     current_drugs = {'A', 'B'}
     new_drugs = {'C'}
-    ddi = {'G', 'H'}
+    not_included = {'D'}
+    ddi = {}
     medical_condition = {'E'}
     biconditionals = {frozenset(['C', frozenset(['B', 'H'])])}
 
-    if is_safe(current_drugs, new_drugs, ddi, medical_condition, biconditionals):
+    if is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals):
         print('Test 3 Passed')
     else:
         print('Test 3 Failed')
