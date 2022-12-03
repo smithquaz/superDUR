@@ -22,7 +22,7 @@ def populate_kb(current_drugs, new_drugs, not_included, ddis, medical_conditons,
             # create a not object add add into kb
             kb.add(Not(Symbol(drugs)))
 
-    # # populate the kb with all biconditionals
+    # populate the kb with all biconditionals
     for pairs in biconditionals:
         
         left = list(pairs)[0]
@@ -292,6 +292,30 @@ def is_safe(current_drugs, new_drugs, not_included, ddis, medical_conditons, bic
     else:
         return False
 
+def find_not_included(current_drugs, new_drugs, ddi, medical_condition, biconditionals):
+    not_included = set()
+    nots = [ddi, medical_condition]
+    for category in nots:
+        for symbol in category:
+            if symbol not in list(current_drugs) and symbol not in list(new_drugs):
+                not_included.add(symbol)
+
+    # handle biconditionals
+    for pairs in biconditionals:
+        
+        # convert pairs to a list
+        pairs = list(pairs)
+        for symbol in pairs:
+            
+            if type(symbol) == frozenset:
+                for symbol_b in list(symbol):
+                    if symbol_b not in list(current_drugs) and symbol_b not in list(new_drugs):
+                        not_included.add(symbol_b)
+
+            elif symbol not in list(current_drugs) and symbol not in list(new_drugs):
+                not_included.add(symbol)
+
+    return not_included
 
 def main():
     
@@ -305,15 +329,18 @@ def main():
     '''
     current_drugs = {'A', 'B'}
     new_drugs = {'C'}
-    not_included = {'D'}
     ddi = {'A', 'D'}
     medical_condition = {}
     biconditionals = {}
+
+    # find all symbols that are not currently taking or are not prescribed
+    not_included = find_not_included(current_drugs, new_drugs, ddi, medical_condition, biconditionals)
 
     if is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals):
         print('Test 1 Failed')
     else:
         print('Test 1 Passed')
+
 
     # scenario 1b: Conflict between DDI and Current Drugs
     '''
@@ -325,10 +352,12 @@ def main():
     '''
     current_drugs = {'A', 'B'}
     new_drugs = {'C'}
-    not_included = {'D'}
     ddi = {'D'}
     medical_condition = {}
     biconditionals = {}
+
+    # find all symbols that are not currently taking or are not prescribed
+    not_included = find_not_included(current_drugs, new_drugs, ddi, medical_condition, biconditionals)
 
     if is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals):
         print('Test 1b Passed')
@@ -346,15 +375,18 @@ def main():
     '''
     current_drugs = {'A'}
     new_drugs = {'B'}
-    not_included = {'C'}
     ddi = {}
     medical_condition = {}
     biconditionals = {frozenset(['B', 'C'])}
+
+    # find all symbols that are not currently taking or are not prescribed
+    not_included = find_not_included(current_drugs, new_drugs, ddi, medical_condition, biconditionals)
 
     if is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals):
         print('Test 2 Failed')
     else:
         print('Test 2 Passed')
+
 
     # scenario 3: Very complicated 
     '''
@@ -366,10 +398,12 @@ def main():
     '''
     current_drugs = {'A', 'B'}
     new_drugs = {'C'}
-    not_included = {'D'}
     ddi = {}
     medical_condition = {'E'}
     biconditionals = {frozenset(['C', frozenset(['B', 'H'])])}
+
+    # find all symbols that are not currently taking or are not prescribed
+    not_included = find_not_included(current_drugs, new_drugs, ddi, medical_condition, biconditionals)
 
     if is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals):
         print('Test 3 Passed')
