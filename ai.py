@@ -231,19 +231,19 @@ def contradiction(kb):
                         right = symbols[j].disjuncts[1]
                         symbol = symbols[i]
 
-                    print(f'left: {left}, right: {right}, symbol: {symbol}')
-                    print(f'current kb: {kb.formula()}')
+                    # print(f'left: {left}, right: {right}, symbol: {symbol}')
+                    # print(f'current kb: {kb.formula()}')
                     
                     # direct match (p ^ (p v q) => p ^ ~q)
                     if left == symbols[i]:
-                        print(f'direct right added: {right}')
+                        # print(f'direct right added: {right}')
                         if right.__class__ == Not: 
                             kb.add(right.operand)
                         else:
                             kb.add(Not(right))
 
                     elif right == symbols[i]:
-                        print(f'direct left added: {left}')
+                        # print(f'direct left added: {left}')
                         if left.__class__ == Not: 
                             kb.add(left.operand)
                         else:
@@ -251,11 +251,11 @@ def contradiction(kb):
                     
                     # indirect match (p ^ (~p v q) => q)
                     elif Not(left) == symbol or Not(symbol) == left:
-                        print(f'indirect right added: {right}')
+                        # print(f'indirect right added: {right}')
                         kb.add(right)
 
                     elif Not(right) == symbol or Not(symbol) == right:
-                        print(f'indirect left added: {left}')
+                        # print(f'indirect left added: {left}')
                         kb.add(left)
 
                     # remove the or statement
