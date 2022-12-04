@@ -8,25 +8,29 @@
 
 {% if safe == True %}
       <div style=font-size:30px align="center">
-            <h1>{{ medication }} is safe to prescribe</h1>
+            <h1>{{ outcome }} safe to prescribe</h1>
       </div>
 {% else %}
       <div style=font-size:30px align="center">
-            <h1> {{ medication }} is not safe to prescribe </h1>
+            <h1> {{ outcome }} not safe to prescribe </h1>
       </div>
       
 {% endif %}
       <div align="center">
-            <h4>DDI List for {{medication}}</h4>
-            <p> {{ medication }} {{ str_ddis }} </p>
+            <h4>DDI List for {{medication_only}}</h4>
+            <p> {{ medication_only }} {{ str_ddis }} </p>
       </div>    
       <div align="center">
-            <h4>Current Drugs</h4>
+            <h4>Patient's Current Medication(s)</h4>
             <p> Patient {{ str_current_drugs }} </p>
       </div>
       <div align="center">
             <h4>Patient Comorbidities</h4>
-            <p> Patient has {{ str_medical_condition }} </p>
+            <p> {{ str_medical_condition }} </p>
+      </div>
+      <div align="center">
+            <h4>Biconditionals</h4>
+            <p> {{ str_biconditionals }} </p>
       </div>
 <div align="center"> 
       <a href="/" class="button">Check Another Case</a>

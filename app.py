@@ -44,7 +44,7 @@ def connect_table():
             values.append(prescription_list[0])
             biconditionals = {frozenset(values)}
         else:
-            biconditionals = {frozenset([prescription_list, frozenset(values)])}
+            biconditionals = {frozenset([prescription_list[0], frozenset(values)])}
 
         # find all symbols that are not currently taking or are not prescribed
         not_included = find_not_included(current_drugs, prescription_list, ddi, medical_condition, biconditionals)
@@ -52,15 +52,30 @@ def connect_table():
         # runs the AI to determine if the drug is safe to prescribe
         safe = is_safe(current_drugs, prescription_list, not_included, ddi, medical_condition, biconditionals)
 
+        #fix grammar issues
+        if len(prescription_list) ==1:
+            medication_only = prescription_list[0]
+            outcome = medication_only + ' is '
+            str_medication_ddis = medication_only 
+        else:
+            medication_only = prescription_list[0] + ' and ' + prescription_list[1]
+            outcome = medication_only + ' are '
+
+
+        #makes string for prescriptions
+
+
         #makes string for ddis
         str_ddis = ''
         if len(ddi)!= 0:
-            str_ddis = 'cannot be prescribed with: '
+            str_ddis = ' cannot be prescribed with: '
             for blah in ddi:
                 str_ddis += blah +", "
             str_ddis = str_ddis[:-2]
+
         else:
-            str_ddis = ' does not clash with any medication'
+            str_ddis = 'will not clash with any medication'
+
 
         #makes string for current drugs
         str_current_drugs = ''
@@ -76,13 +91,24 @@ def connect_table():
         #makes string for patient comorbidities
         str_medical_condition = ''
         if len(medical_condition) != 0:
+            str_medical_condition = 'Patient cannot take '
             for thing in medical_condition:
                 str_medical_condition += thing +', '
             str_medical_condition = str_medical_condition[:-2]
         else: 
-            str_medical_condition = 'no comorbidities'
+            str_medical_condition = 'No restrictions'
 
-        return render_template("final.html", safe=safe, medication=new_drugs, str_ddis=str_ddis, str_current_drugs=str_current_drugs, str_medical_condition=str_medical_condition)
+        #makes string for biconditionals
+        str_biconditionals = ''
+        if len(values) == 0:
+            str_biconditionals = medication_only + ' has no biconditionals'
+        elif len(values) == 1:
+            str_biconditionals = medication_only + ' must be taken with: ' + values[0]
+        else:
+            str_biconditionals = prescription_list[0] + ' must be taken with: ' + values[0] + ' or ' + values[1]
+
+        return render_template("final.html", safe=safe, str_ddis=str_ddis, str_current_drugs=str_current_drugs, str_medical_condition=str_medical_condition, 
+         medication_only=medication_only, str_biconditionals=str_biconditionals, outcome=outcome)
 
 
     else:
