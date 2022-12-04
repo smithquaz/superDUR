@@ -26,10 +26,18 @@ def connect_table():
         
         # store the set into a list
         values = []
-        for val in query_bc(new_drugs):
+        bc = query_bc(new_drugs)
+        for val in bc:
             values.append(str(val))
 
-        biconditionals = {frozenset([new_drugs, frozenset(values)])}
+        # if list is empty
+        if values:
+            biconditionals = {}
+        elif len(bc) == 1:
+            values.append(new_drugs)
+            biconditionals = {frozenset(values)}
+        else:
+            biconditionals = {frozenset([new_drugs, frozenset(values)])}
 
         # find all symbols that are not currently taking or are not prescribed
         not_included = find_not_included(current_drugs, new_drugs, ddi, medical_condition, biconditionals)
