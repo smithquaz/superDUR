@@ -17,7 +17,7 @@ def connect_table():
         print('Hello World')
 
         current_drugs = query_prescribed_drugs()
-        new_drugs = request.form.get("medication")
+        new_drugs = set(request.form.get("medication"))
         ddi = query_implications()
         medical_condition = query_mc()
         biconditionals = {frozenset([new_drugs, frozenset(list(query_bc()))])}
