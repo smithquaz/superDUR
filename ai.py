@@ -7,8 +7,8 @@ def populate_kb(current_drugs, new_drugs, not_included, ddis, medical_conditons,
     # create empty kb
     kb = And()
 
-    yes = [current_drugs, new_drugs]
-    for categories in yes:
+    consumed_drugs = [current_drugs, new_drugs]
+    for categories in consumed_drugs:
         for drugs in categories:
 
             # create object then add into kb

@@ -17,12 +17,14 @@ def connect_table():
         nric = request.form.get('nric')
         new_drugs = request.form.get('medication')
 
-        # create the different parameters
-        prescription_list = new_drugs.split(',')
-        print(prescription_list)
-
+        # fill all the various AI parameters
         current_drugs = query_prescribed_drugs(nric)
-        
+        medical_condition = query_mc(nric)
+
+        # handle where user input multiple new drugs
+        prescription_list = new_drugs.split(',')
+
+        # currently can only handle 2 new drugs
         if len(prescription_list) == 2:
             ddi = query_implications(prescription_list[0])
             bc = query_bc(prescription_list[0])
@@ -30,27 +32,25 @@ def connect_table():
             ddi = query_implications(new_drugs)
             bc = query_bc(new_drugs)
 
-        medical_condition = query_mc(nric)
-        
-        # store the set into a list
+        # store the biconditional set into a list
         values = []
         for val in bc:
             values.append(str(val))
         
-        # if list is empty
+        # fill the biconditional up to 3 nested sets (0, 1, 2)
         if len(values) == 0:
             biconditionals = {}
         elif len(values) == 1:
-            values.append(new_drugs)
+            values.append(prescription_list[0])
             biconditionals = {frozenset(values)}
         else:
-            biconditionals = {frozenset([new_drugs, frozenset(values)])}
+            biconditionals = {frozenset([prescription_list, frozenset(values)])}
 
         # find all symbols that are not currently taking or are not prescribed
-        not_included = find_not_included(current_drugs, new_drugs, ddi, medical_condition, biconditionals)
+        not_included = find_not_included(current_drugs, prescription_list, ddi, medical_condition, biconditionals)
         
         # runs the AI to determine if the drug is safe to prescribe
-        safe = is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals)
+        safe = is_safe(current_drugs, prescription_list, not_included, ddi, medical_condition, biconditionals)
 
         #makes string for ddis
         str_ddis = ''
