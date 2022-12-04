@@ -15,6 +15,27 @@ def connect_table():
         print(request.form.get("nric"))
         print(request.form.get("medication"))
         print('Hello World')
+
+        current_drugs = query_prescribed_drugs()
+        new_drugs = request.form.get("medication")
+        ddi = query_implications()
+        medical_condition = query_mc()
+        biconditionals = {frozenset([new_drugs, frozenset(list(query_bc()))])}
+
+        # find all symbols that are not currently taking or are not prescribed
+        not_included = find_not_included(current_drugs, new_drugs, ddi, medical_condition, biconditionals)
+
+        print(f'current drugs: {current_drugs}')
+        print(f'new drugs: {new_drugs}')
+        print(f'medical_condition: {medical_condition}')
+        print(f'biconditionals: {biconditionals}')
+        print(f'not included: {not_included}')
+
+        if is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals):
+            print('Test 3 Passed')
+        else:
+            print('Test 3 Failed')
+
         return render_template("final.html")
 
 
