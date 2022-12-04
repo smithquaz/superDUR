@@ -42,7 +42,37 @@ def connect_table():
         # runs the AI to determine if the drug is safe to prescribe
         safe = is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals)
 
-        return render_template("final.html", safe=safe, medication=new_drugs)
+        #makes string for ddis
+        str_ddis = ''
+        if len(ddi)!= 0:
+            str_ddis = 'cannot be prescribed with: '
+            for blah in ddi:
+                str_ddis += blah +", "
+            str_ddis = str_ddis[:-2]
+        else:
+            str_ddis = ' does not clash with any medication'
+
+        #makes string for current drugs
+        str_current_drugs = ''
+        if len(current_drugs) != 0:
+            str_current_drugs = ' is currently taking: '
+            for item in current_drugs:
+                str_current_drugs += item + ', '
+            str_current_drugs = str_current_drugs[:-2]
+        else: 
+            str_current_drugs += ' does not take other medication'
+
+
+        #makes string for patient comorbidities
+        str_medical_condition = ''
+        if len(medical_condition) != 0:
+            for thing in medical_condition:
+                str_medical_condition += thing +', '
+            str_medical_condition = str_medical_condition[:-2]
+        else: 
+            str_medical_condition = 'no comorbidities'
+
+        return render_template("final.html", safe=safe, medication=new_drugs, str_ddis=str_ddis, str_current_drugs=str_current_drugs, str_medical_condition=str_medical_condition)
 
 
     else:
