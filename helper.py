@@ -1,7 +1,7 @@
 #python simple_execute_function.py
 #import the library
 import mysql.connector
-
+ 
 def query_mc(nric):
 
   # creating connection
@@ -26,10 +26,14 @@ def query_mc(nric):
   mycursor1.close()
   mycursor2.close()
   conn.close()
+ 
+  if n == None:
+    return set()
 
-  return n[0]
+  else:
+    return n[0]
 
-#print(query_mc())
+#print(query_mc(3))
 #print(type(query_mc()))
 
 def query_implications(new_drug):
@@ -52,8 +56,12 @@ def query_implications(new_drug):
   mycursor2.close()
   conn.close()
 
-  return v[0]
-#print(query_implications())
+  if v[0] == None:
+    return set()
+
+  else:
+    return v[0]
+#print(query_implications('F'))
 #print(type(query_implications()))
 
 def query_prescribed_drugs(nric):
@@ -77,8 +85,13 @@ def query_prescribed_drugs(nric):
   mycursor1.close()
   conn.close()
 
-  return v[0]
-#print(query_prescribed_drugs())
+  if v == None:
+    return set()
+
+  else:
+    return v[0]
+
+#print(query_prescribed_drugs(3))
 #print(type(query_prescribed_drugs()))
 
 def query_bc(new_drug):
@@ -102,4 +115,10 @@ def query_bc(new_drug):
   mycursor3.close()
   conn.close()
 
-  return v[0]
+  if v[0] == None:
+    return set()
+
+  else:
+    return v[0]
+
+#print(query_bc('F'))
