@@ -44,7 +44,7 @@ def connect_table():
         
         safe = is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals)
 
-        return render_template("final.html")
+        return render_template("final.html", safe=safe)
 
 
     else:

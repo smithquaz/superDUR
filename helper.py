@@ -103,5 +103,3 @@ def query_bc(new_drug):
   conn.close()
 
   return v[0]
-print(query_bc())
-print(type(query_bc()))

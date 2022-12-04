@@ -6,15 +6,10 @@
 
 {% block body %}
 
-
-
-{% for row in data %}
-      <tr>
-         <td>{{ row[0] }}</td>
-         <td>{{ row[1] }}</td>
-         <td>{{ row[2] }}</td>
-         <td>{{ row[3] }}</td>
-      </tr>
-{% endfor %}
+{% if safe == True %}
+      <div>{{ medication }} is safe to prescribe</div>
+{% else %}
+      <div>{{ medication }} is not safe to prescribe</div>
+{% endif %}
 
 {% endblock %}
