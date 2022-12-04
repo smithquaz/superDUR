@@ -8,8 +8,8 @@ def query_mc():
   conn = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="01446785",
-    database ="hackathon1"
+    password="password",
+    database ="patient"
   )
 
   # import the cursor from the connection (conn)
@@ -38,8 +38,8 @@ def query_implications():
   conn = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="01446785",
-    database ="hackathon1"
+    password="password",
+    database ="patient"
   )
 
   # import the cursor from the connection (conn)
@@ -62,8 +62,8 @@ def query_prescribed_drugs():
   conn = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="01446785",
-    database ="hackathon1"
+    password="password",
+    database ="patient"
   )
 
   # import the cursor from the connection (conn)
@@ -87,8 +87,8 @@ def query_bc():
   conn = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="01446785",
-    database ="hackathon1"
+    password="password",
+    database ="patient"
   )
 
   # import the cursor from the connection (conn)

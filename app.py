@@ -17,10 +17,19 @@ def connect_table():
         print('Hello World')
 
         current_drugs = query_prescribed_drugs()
-        new_drugs = set(request.form.get("medication"))
+        new_drugs = request.form.get("medication")
         ddi = query_implications()
         medical_condition = query_mc()
-        biconditionals = {frozenset([new_drugs, frozenset(list(query_bc()))])}
+        bc = query_bc()
+        # print(bc)
+        # print(type(frozenset(bc)))
+        values = []
+        for val in query_bc():
+            values.append(str(val))
+            print(val)
+
+        print(values)
+        biconditionals = {frozenset([new_drugs, frozenset(values)])}
 
         # find all symbols that are not currently taking or are not prescribed
         not_included = find_not_included(current_drugs, new_drugs, ddi, medical_condition, biconditionals)
