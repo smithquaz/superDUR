@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
+from helper import *
+from ai import *
 
 
 app = Flask(__name__)
@@ -10,11 +12,10 @@ Bootstrap(app)
 @app.route('/', methods=['GET', 'POST'])
 def connect_table():
     if request.method == "POST":
-        nric = set(request.form.get("nric"))
-        new_drug = set(request.form.get("medication"))
-        print(type(new_drug))
-        ##will need to change this to final later on to display output, check returned thing below also 
-        return render_template("index.html")
+        print(request.form.get("nric"))
+        print(request.form.get("medication"))
+        print('Hello World')
+        return render_template("final.html")
 
 
     else:
