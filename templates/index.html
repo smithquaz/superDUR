@@ -7,20 +7,28 @@
 
 {% block body %}
 
-<form method="post">
-      NRIC: <input name="nric"/>
-      <br/><br/>
-      Medication: <input name="medication"/>
-      <br/><br/>
-      <button type="submit">Check DDI</button>
-</form>
+<div align="center">
+      <h1>superDUR</h1>
+      <p>Enter Patient NRIC and Medication</p>
+</div>
+      
+<div align="center">
+      <form method="post">
+            NRIC: <input name="nric"/>
+            <br/><br/>
+            Medication: <input name="medication"/>
+            <br/><br/>
+            <button type="submit">Check DDI</button>
+      </form>
+</div>
 
-{% for row in data %}
+
+<!-- {% for row in data %}
       <tr>
          <td>{{ row[0] }}</td>
          <td>{{ row[1] }}</td>
          <td>{{ row[2] }}</td>
          <td>{{ row[3] }}</td>
       </tr>
-{% endfor %}
+{% endfor %} -->
 {% endblock %}

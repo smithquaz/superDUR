@@ -116,3 +116,26 @@ body {
   .account-heading {
     font-size: 2.5rem;
   }
+
+  a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
+
+.center {
+    line-height: 200px;
+    height: 200px;
+    border: 3px solid green;
+    text-align: center;
+  }
+  
+  /* If the text has multiple lines, add the following: */
+.center p {
+line-height: 1.5;
+display: inline-block;
+vertical-align: middle;
+}

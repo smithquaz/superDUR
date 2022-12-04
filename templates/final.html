@@ -7,9 +7,19 @@
 {% block body %}
 
 {% if safe == True %}
-      <div>{{ medication }} is safe to prescribe</div>
+      <div align="center">
+            <h2>
+                  {{ medication }} is safe to prescribe
+            </h2>
+      </div>
 {% else %}
-      <div>{{ medication }} is not safe to prescribe</div>
+      <div align="center">
+            <h2>
+                  {{ medication }} is not safe to prescribe
+            </h2>
 {% endif %}
 
+<div align="center"> 
+      <a href="/" class="button">Check Another Case</a>
+</div>
 {% endblock %}

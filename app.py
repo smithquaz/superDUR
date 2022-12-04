@@ -14,9 +14,6 @@ def connect_table():
     if request.method == "POST":
 
         # nric and medication
-        print(request.form.get("nric"))
-        print(request.form.get("medication"))
-
         nric = request.form.get('nric')
         new_drugs = request.form.get('medication')
 
@@ -29,11 +26,11 @@ def connect_table():
         bc = query_bc(new_drugs)
         for val in bc:
             values.append(str(val))
-
+        
         # if list is empty
-        if values:
+        if len(values) == 0:
             biconditionals = {}
-        elif len(bc) == 1:
+        elif len(values) == 1:
             values.append(new_drugs)
             biconditionals = {frozenset(values)}
         else:
@@ -41,18 +38,11 @@ def connect_table():
 
         # find all symbols that are not currently taking or are not prescribed
         not_included = find_not_included(current_drugs, new_drugs, ddi, medical_condition, biconditionals)
-
-        print('values: ')
-        print(f'current drugs: {current_drugs}')
-        print(f'new drugs: {new_drugs}')
-        print(f'medical_condition: {medical_condition}')
-        print(f'biconditionals: {biconditionals}')
-        print(f'not included: {not_included}')
-
         
+        # runs the AI to determine if the drug is safe to prescribe
         safe = is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals)
 
-        return render_template("final.html", safe=safe)
+        return render_template("final.html", safe=safe, medication=new_drugs)
 
 
     else:
