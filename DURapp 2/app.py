@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-from form import PatientForm
 from flask_bootstrap import Bootstrap
 
 
@@ -38,13 +37,6 @@ def connect_table():
         cur.execute("SELECT * FROM patient_history")
         data = cur.fetchall()
         return render_template('index.html', data=data)
-
-    # render_template('index.html', data=data)
-    
-
-# def get_info():
-
-
 
 
 
