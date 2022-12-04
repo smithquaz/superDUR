@@ -12,28 +12,27 @@ Bootstrap(app)
 @app.route('/', methods=['GET', 'POST'])
 def connect_table():
     if request.method == "POST":
+
+        # nric and medication
         print(request.form.get("nric"))
         print(request.form.get("medication"))
-        print('Hello World')
 
         current_drugs = query_prescribed_drugs()
         new_drugs = request.form.get("medication")
         ddi = query_implications()
         medical_condition = query_mc()
-        bc = query_bc()
-        # print(bc)
-        # print(type(frozenset(bc)))
+        
+        # store the set into a list
         values = []
         for val in query_bc():
             values.append(str(val))
-            print(val)
 
-        print(values)
         biconditionals = {frozenset([new_drugs, frozenset(values)])}
 
         # find all symbols that are not currently taking or are not prescribed
         not_included = find_not_included(current_drugs, new_drugs, ddi, medical_condition, biconditionals)
 
+        print('values: ')
         print(f'current drugs: {current_drugs}')
         print(f'new drugs: {new_drugs}')
         print(f'medical_condition: {medical_condition}')
