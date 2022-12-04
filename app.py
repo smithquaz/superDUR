@@ -17,14 +17,16 @@ def connect_table():
         print(request.form.get("nric"))
         print(request.form.get("medication"))
 
-        current_drugs = query_prescribed_drugs()
-        new_drugs = request.form.get("medication")
-        ddi = query_implications()
-        medical_condition = query_mc()
+        nric = request.form.get('nric')
+        new_drugs = request.form.get('medication')
+
+        current_drugs = query_prescribed_drugs(nric)
+        ddi = query_implications(new_drugs)
+        medical_condition = query_mc(nric)
         
         # store the set into a list
         values = []
-        for val in query_bc():
+        for val in query_bc(new_drugs):
             values.append(str(val))
 
         biconditionals = {frozenset([new_drugs, frozenset(values)])}
@@ -39,10 +41,8 @@ def connect_table():
         print(f'biconditionals: {biconditionals}')
         print(f'not included: {not_included}')
 
-        if is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals):
-            print('Test 3 Passed')
-        else:
-            print('Test 3 Failed')
+        
+        safe = is_safe(current_drugs, new_drugs, not_included, ddi, medical_condition, biconditionals)
 
         return render_template("final.html")
 
