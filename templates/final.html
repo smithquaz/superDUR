@@ -5,9 +5,10 @@
 {% endblock %}
 
 {% block body %}
-
+<br><br><br>
+<div>
 {% if safe == True %}
-      <div style=font-size:30px align="center">
+      <div style=font-size:30px align="center" >
             <h1>{{ outcome }} safe to prescribe</h1>
       </div>
 {% else %}
@@ -16,7 +17,41 @@
       </div>
       
 {% endif %}
-      <div align="center">
+
+<style>
+      table, th, td {
+        border: 1px solid black;
+      }
+      table.center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      th, td {
+  padding: 15px;
+}
+</style>
+
+<table align="center" style="background-color:#FFFFFF" >
+      <tr>
+        <th>DDI List for {{medication_only}}</th>
+        <th>Patient's Current Medication(s)</th>
+        <th>Patient Comorbidities</th>
+        <th>Biconditionals</th>
+      </tr>
+      <tr>
+        <td>{{ medication_only }} {{ str_ddis }}</td>
+        <td> Patient {{ str_current_drugs }}</td>
+        <td>{{ str_medical_condition }}</td>
+        <td>{{ str_biconditionals }}</td>
+      </tr>
+
+</table>
+<br>
+</div>
+
+
+<!-- PROPER CODE BELOW -->
+      <!-- <div align="center">
             <h4>DDI List for {{medication_only}}</h4>
             <p> {{ medication_only }} {{ str_ddis }} </p>
       </div>    
@@ -31,7 +66,9 @@
       <div align="center">
             <h4>Biconditionals</h4>
             <p> {{ str_biconditionals }} </p>
-      </div>
+      </div> -->
+
+<br>
 <div align="center"> 
       <a href="/" class="button">Check Another Case</a>
 </div>

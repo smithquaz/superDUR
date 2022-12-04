@@ -1,34 +1,24 @@
 
 {% extends 'base.html' %}
 
-<!-- {% block head %}
-
-{% endblock %} -->
 
 {% block body %}
-
-<div align="center">
+<br><br><br>
+<div align="center" >
       <h1 style=font-size:50px>superDUR</h1>
-      <h4>Enter Patient NRIC and Medication</h4>
+      <h4>Enter Patient ID and Medication</h4>
+      <!-- <i>If checking for more than one medication,</i>
+      <i>separate with ','</i> -->
 </div>
-      
+<br><br>
 <div align="center">
       <form method="post">
-            NRIC: <input name="nric"/>
+            ID: <input name="nric"/>
             <br/><br/>
             Medication: <input name="medication"/>
             <br/><br/>
-            <button type="submit">Check DDI</button>
+            <button type="submit">Check for DDI</button>
       </form>
 </div>
 
-
-<!-- {% for row in data %}
-      <tr>
-         <td>{{ row[0] }}</td>
-         <td>{{ row[1] }}</td>
-         <td>{{ row[2] }}</td>
-         <td>{{ row[3] }}</td>
-      </tr>
-{% endfor %} -->
 {% endblock %}
