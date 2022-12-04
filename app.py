@@ -17,13 +17,23 @@ def connect_table():
         nric = request.form.get('nric')
         new_drugs = request.form.get('medication')
 
+        # create the different parameters
+        prescription_list = new_drugs.split(',')
+        print(prescription_list)
+
         current_drugs = query_prescribed_drugs(nric)
-        ddi = query_implications(new_drugs)
+        
+        if len(prescription_list) == 2:
+            ddi = query_implications(prescription_list[0])
+            bc = query_bc(prescription_list[0])
+        else:
+            ddi = query_implications(new_drugs)
+            bc = query_bc(new_drugs)
+
         medical_condition = query_mc(nric)
         
         # store the set into a list
         values = []
-        bc = query_bc(new_drugs)
         for val in bc:
             values.append(str(val))
         
