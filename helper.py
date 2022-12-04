@@ -1,7 +1,26 @@
 #python simple_execute_function.py
 #import the library
 import mysql.connector
- 
+
+def query_mc1(nric):
+
+  # creating connection
+  conn = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="password",
+    database ="patient"
+  )
+
+  # import the cursor from the connection (conn)
+  mycursor1 = conn.cursor()
+  mycursor2 = conn.cursor()
+
+  mycursor1.execute(f"SELECT pre_existing_mc FROM patient_history WHERE patient_id = {nric}")
+  v = mycursor1.fetchone()
+
+  return v[0]
+
 def query_mc(nric):
 
   # creating connection

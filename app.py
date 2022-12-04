@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from helper import *
 from ai import *
+import copy
 
 
 app = Flask(__name__)
@@ -38,11 +39,12 @@ def connect_table():
             values.append(str(val))
         
         # fill the biconditional up to 3 nested sets (0, 1, 2)
+        biconditional_values = copy.deepcopy(values)
         if len(values) == 0:
             biconditionals = {}
         elif len(values) == 1:
-            values.append(prescription_list[0])
-            biconditionals = {frozenset(values)}
+            biconditional_values.append(prescription_list[0])
+            biconditionals = {frozenset(biconditional_values)}
         else:
             biconditionals = {frozenset([prescription_list[0], frozenset(values)])}
 
@@ -90,8 +92,10 @@ def connect_table():
 
         #makes string for patient comorbidities
         str_medical_condition = ''
+
         if len(medical_condition) != 0:
-            str_medical_condition = 'Patient cannot take '
+            patient_has = query_mc1(nric)
+            str_medical_condition = 'Patient has ' + str(patient_has) + ' and cannot take: ' 
             for thing in medical_condition:
                 str_medical_condition += thing +', '
             str_medical_condition = str_medical_condition[:-2]
@@ -100,6 +104,8 @@ def connect_table():
 
         #makes string for biconditionals
         str_biconditionals = ''
+        print(values)
+        print(len(values))
         if len(values) == 0:
             str_biconditionals = medication_only + ' has no biconditionals'
         elif len(values) == 1:
