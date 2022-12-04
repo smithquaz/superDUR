@@ -15,7 +15,7 @@ def query_mc():
   mycursor1 = conn.cursor()
   mycursor2 = conn.cursor()
 
-  mycursor1.execute("SELECT pre_existing_mc FROM patient_history WHERE patient_id = 1")
+  mycursor1.execute("SELECT pre_existing_mc FROM patient_history WHERE patient_id = 3")
   v = mycursor1.fetchone()
   # print(v)
 
@@ -26,9 +26,10 @@ def query_mc():
   mycursor2.close()
   conn.close()
 
-  return n
+  return n[0]
 
 #print(query_mc())
+#print(type(query_mc()))
 
 def query_implications():
   import mysql.connector
@@ -51,8 +52,9 @@ def query_implications():
   mycursor2.close()
   conn.close()
 
-  return v
+  return v[0]
 #print(query_implications())
+#print(type(query_implications()))
 
 def query_prescribed_drugs():
   import mysql.connector
@@ -76,8 +78,9 @@ def query_prescribed_drugs():
   mycursor1.close()
   conn.close()
 
-  return v
+  return v[0]
 #print(query_prescribed_drugs())
+#print(type(query_prescribed_drugs()))
 
 def query_bc():
   import mysql.connector
@@ -101,5 +104,6 @@ def query_bc():
   mycursor3.close()
   conn.close()
 
-  return v
+  return v[0]
 print(query_bc())
+print(type(query_bc()))
