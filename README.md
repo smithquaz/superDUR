@@ -1,5 +1,5 @@
 # superDUR
-IEEE SSCI Hackathon 2022 Champions
+IEEE SSCI Hackathon 2022 Top 6
 
 ## Members
 1. Toh Yue Zhen
